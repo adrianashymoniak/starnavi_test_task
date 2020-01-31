@@ -1,3 +1,5 @@
+from django.contrib.auth import password_validation
+from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import User
 from rest_framework import serializers
 
@@ -13,9 +15,21 @@ class PostSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
-    posts = serializers.PrimaryKeyRelatedField(many=True,
-                                               queryset=Post.objects.all())
+    class Meta:
+        model = User
+        fields = ('url', 'username', 'password')
+
+
+class UserRegisterSerializer(UserSerializer):
+    password = serializers.CharField(style={'input_type': 'password'},
+                                     write_only=True)
+    password2 = serializers.CharField(style={'input_type': 'password'},
+                                      write_only=True)
 
     class Meta:
         model = User
-        fields = ('id', 'username', 'posts')
+        fields = ('username', 'email', 'password', 'password2')
+
+
+class TokenSerializer(serializers.Serializer):
+    token = serializers.CharField(max_length=255)
