@@ -15,14 +15,15 @@ class PostSerializer(serializers.ModelSerializer):
 
 
 class UserSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(style={'input_type': 'password'},
+                                     write_only=True)
+
     class Meta:
         model = User
         fields = ('url', 'username', 'password')
 
 
 class UserRegisterSerializer(UserSerializer):
-    password = serializers.CharField(style={'input_type': 'password'},
-                                     write_only=True)
     password2 = serializers.CharField(style={'input_type': 'password'},
                                       write_only=True)
 
