@@ -1,7 +1,8 @@
-from django.contrib.auth import password_validation
-from django.contrib.auth.base_user import BaseUserManager
 from django.contrib.auth.models import User
+from django.contrib.auth.validators import UnicodeUsernameValidator
 from rest_framework import serializers
+
+from rest_framework.validators import UniqueValidator
 
 from core.models import Post
 
@@ -20,10 +21,25 @@ class UserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ('url', 'username', 'password')
+        fields = ('username', 'password')
+
+    def save(self):
+        user = User(email=self.validated_data['email'],
+                    username=self.validated_data['username'])
+        password = self.validated_data['password']
+        password2 = self.validated_data['password2']
+        if password != password2:
+            raise serializers.ValidationError(
+                {'password': 'Passwords mush match'})
+        user.set_password(password)
+        user.save()
+        return user
 
 
-class UserRegisterSerializer(UserSerializer):
+class UserRegisterSerializer(serializers.ModelSerializer):
+    password = serializers.CharField(style={'input_type': 'password'},
+                                     write_only=True)
+
     password2 = serializers.CharField(style={'input_type': 'password'},
                                       write_only=True)
 

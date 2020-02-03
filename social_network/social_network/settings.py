@@ -136,3 +136,5 @@ SIMPLE_JWT = {
     'REFRESH_TOKEN_LIFETIME': timedelta(days=2),
     'AUTH_HEADER_TYPES': ('JWT', 'Bearer'),
 }
+
+ACCOUNT_LOGOUT_ON_GET = True
