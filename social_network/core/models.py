@@ -7,6 +7,7 @@ class Post(models.Model):
     description = models.TextField()
     author = models.ForeignKey('auth.User', related_name='posts',
                                on_delete=models.CASCADE)
+    likes = models.ManyToManyField('auth.User', blank=True)
 
     class Meta:
         ordering = ['created', ]

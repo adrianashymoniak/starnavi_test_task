@@ -1,8 +1,5 @@
 from django.contrib.auth.models import User
-from django.contrib.auth.validators import UnicodeUsernameValidator
 from rest_framework import serializers
-
-from rest_framework.validators import UniqueValidator
 
 from core.models import Post
 
@@ -12,7 +9,7 @@ class PostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = '__all__'
+        fields = ('title', 'description', 'author', 'created', 'likes')
 
 
 class UserSerializer(serializers.ModelSerializer):
