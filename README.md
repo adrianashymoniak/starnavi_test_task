@@ -12,8 +12,10 @@
 ##### Installation process:
 * Clone repository: **git clone https://github.com/adrianashymoniak/starnavi_test_task.git**
 * Create virtual env:  run command in terminal **python -m venv myvenv**
-* Activate virtual env (optional): 
-    - For Linux: **source myvenv/bin/activate**
-    - For Windows **myenv\Scripts\activate**
+* Activate virtual env (optional): **source myvenv/bin/activate**
 * run: **pip install -r requirements.txt** (for installing required libraries in your virtual env)
+* Make sure your virtual environment is activated and requirements are installed    
+* Go to **social_network** folder and run migration: **python manage.py migrate**
+* Run server locally: **python manage.py runserver**
+* Open browser and go to  **http://127.0.0.1:8000/** -> click login or go to **http://127.0.0.1:8000/auth/register** to create your own user
 
