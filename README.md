@@ -2,8 +2,9 @@
 * python 3.8
 * django 3.0
 * django rest framework 3.11
-* djangorestframework-jwt==1.11.0
+* djangorestframework-jwt 1.11
 * djangorestframework-simplejwt 4.4
+* django-likes 2.0
 
 ##### Optional:
 * virtual env
